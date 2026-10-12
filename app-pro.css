@@ -1042,6 +1042,7 @@ button {
 .modal-dialog {
   width: min(1180px, 96vw);
   height: min(840px, 92vh);
+  max-height: 92vh;
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
@@ -1051,23 +1052,30 @@ button {
   overflow: hidden;
 }
 
-/* Modal Media Side (Clean & Fully Visible Images) */
+/* Modal Media Side (Clean, Fully Visible & Bounded Height) */
 .modal-media-side {
   background: var(--bg-surface-subtle);
   padding: 16px;
   display: flex;
   flex-direction: column;
   min-width: 0;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
   border-right: 1px solid var(--border);
 }
 
 .modal-gallery-grid {
   flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  height: 100%;
   min-height: 0;
+  max-height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  overflow: hidden;
 }
 
 .gallery-shot {
@@ -1081,18 +1089,29 @@ button {
   align-items: center;
   justify-content: center;
   cursor: zoom-in;
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
 }
 
 .gallery-shot:first-child {
-  grid-row: 1 / -1;
+  grid-row: 1 / 3;
+  grid-column: 1 / 2;
 }
 
 .gallery-shot img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   background: #ffffff;
   display: block;
+  transition: transform 0.25s ease;
+}
+
+.gallery-shot:hover img {
+  transform: scale(1.02);
 }
 
 .gallery-tag {
@@ -1108,20 +1127,23 @@ button {
   text-transform: uppercase;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(226, 232, 240, 0.8);
+  z-index: 2;
 }
 
 .gallery-zoom-hint {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(15, 23, 42, 0.8);
   color: #ffffff;
-  padding: 4px 6px;
+  padding: 4px 7px;
   border-radius: 6px;
-  font-size: 10px;
+  font-size: 10.5px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 4px;
+  z-index: 2;
 }
 
 .gallery-caption {
@@ -1130,20 +1152,25 @@ button {
   right: 0;
   bottom: 0;
   padding: 16px 10px 6px;
-  background: linear-gradient(transparent, rgba(15, 23, 42, 0.82));
+  background: linear-gradient(transparent, rgba(15, 23, 42, 0.85));
   color: #fff;
   font-size: 11px;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  z-index: 2;
 }
 
-/* Modal Info Side */
+/* Modal Info Side (Fixed Height & Smooth Scroll) */
 .modal-info-side {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
   background: #ffffff;
 }
 
@@ -1204,6 +1231,7 @@ button {
   padding: 14px 20px 10px;
   border-bottom: 1px solid var(--border);
   background: #ffffff;
+  flex-shrink: 0;
 }
 
 .modal-group-title {
@@ -1227,6 +1255,7 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .subject-label {
@@ -1254,12 +1283,15 @@ button {
   border-color: var(--primary);
 }
 
-/* Modal Code List */
+/* Modal Code List (Scrollable, Guaranteed Overflow Handling) */
 .modal-codes-list {
   flex: 1;
-  overflow-y: auto;
   min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
   scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-code-item {
@@ -1328,8 +1360,9 @@ button {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   display: none;
-  max-height: 40%;
+  max-height: 180px;
   overflow-y: auto;
+  flex-shrink: 0;
 }
 
 .modal-short-detail.open {
@@ -1362,62 +1395,189 @@ button {
   background: #ffffff;
 }
 
-/* Lightbox Modal (Full Resolution Image Viewer) */
+/* ==========================================================================
+   ENHANCED LIGHTBOX MODAL WITH INTERACTIVE DEEP ZOOM & PAN
+   ========================================================================== */
+
 .lightbox-overlay {
   position: fixed;
   inset: 0;
   z-index: 150;
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
 }
 
 .lightbox-overlay.open {
   display: flex;
 }
 
-.lightbox-img {
-  max-width: 95vw;
-  max-height: 90vh;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  background: #ffffff;
-}
-
-.lightbox-close {
-  position: fixed;
-  top: 20px;
-  right: 24px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  font-size: 26px;
-  cursor: pointer;
+.lightbox-topbar {
+  height: 64px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+  z-index: 10;
 }
 
-.lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.4);
+.lightbox-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.lightbox-badge {
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  padding: 3px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
 }
 
 .lightbox-caption {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.75);
   color: #ffffff;
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 750;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lightbox-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lb-tool-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lb-tool-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: scale(1.05);
+}
+
+.lb-zoom-level {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 750;
+  color: #e2e8f0;
+  min-width: 50px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lightbox-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.85);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 6px;
+  transition: all 0.15s ease;
+}
+
+.lightbox-close:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+/* Viewport & Stage untuk Deep Zoom & Pan */
+.lightbox-viewport {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+}
+
+.lightbox-viewport.is-zoomed {
+  cursor: grab;
+}
+
+.lightbox-viewport.is-panning {
+  cursor: grabbing;
+}
+
+.lightbox-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.lightbox-stage.dragging {
+  transition: none;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+  background: #ffffff;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.lightbox-bottom-hint {
+  height: 40px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  font-size: 12px;
+  flex-shrink: 0;
+  z-index: 10;
 }
 
 /* Toast Notice */
