@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kamus Shortcode Prompt Pro — Pustaka Visual & Prompt Studio</title>
+  <meta name="description" content="Pustaka visual interaktif 1.322 shortcode prompt AI profesional. Cari, jelajahi, sesuaikan subjek, dan susun prompt siap pakai untuk video & gambar.">
+  <meta name="theme-color" content="#090d16">
+  
+  <!-- Stylesheet Modern Pro -->
+  <link rel="stylesheet" href="./app-pro.css">
+  
+  <!-- Favicon SVG Ringan -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='7' fill='%23dc2743'/><text x='12' y='16' font-size='12' font-weight='900' fill='%23fff' text-anchor='middle'>P+</text></svg>">
+</head>
+<body>
+
+  <!-- SVG Symbols Dictionary -->
+  <svg width="0" height="0" style="position:absolute; display:none;" aria-hidden="true">
+    <symbol id="icon-home" viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v10h-6v-6H9v6H3Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="m20 20-4-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-reels" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="m8 3 4 5m2-5 4 5M9 12l6 4-6 4Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor"/><rect x="14" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor"/></symbol>
+    <symbol id="icon-explorer" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" fill="none" stroke="currentColor"/><path d="M6 6h10M6 10h10M6 14h6" fill="none" stroke="currentColor"/></symbol>
+    <symbol id="icon-save" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-sparkle" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" fill="none" stroke="currentColor"/></symbol>
+    <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" fill="none" stroke="currentColor"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor"/></symbol>
+  </svg>
+
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation (Desktop & Tablet) -->
+    <aside class="app-sidebar" aria-label="Navigasi Utama">
+      <div class="sidebar-header">
+        <div class="brand-icon">P+</div>
+        <div>
+          <div class="brand-title">Prompt Visual</div>
+          <div class="brand-subtitle">Pro Studio Edition</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-link active" data-view="feed" title="Beranda Visual">
+          <svg class="icon"><use href="#icon-home"/></svg>
+          <span class="nav-label">Beranda</span>
+        </button>
+        <button class="nav-link" data-view="reels" title="Reels & Motion Visual">
+          <svg class="icon"><use href="#icon-reels"/></svg>
+          <span class="nav-label">Reels</span>
+        </button>
+        <button class="nav-link" data-view="explorer" title="Jelajahi 1.322 Shortcode">
+          <svg class="icon"><use href="#icon-explorer"/></svg>
+          <span class="nav-label">Kamus 1.322</span>
+          <span class="badge-count">1.322</span>
+        </button>
+        <button class="nav-link" data-view="composer" title="Prompt Studio / Composer">
+          <svg class="icon"><use href="#icon-sparkle"/></svg>
+          <span class="nav-label">Prompt Studio</span>
+        </button>
+        <button class="nav-link" data-view="saved" title="Kelompok Tersimpan">
+          <svg class="icon"><use href="#icon-save"/></svg>
+          <span class="nav-label">Tersimpan</span>
+          <span class="badge-count" id="savedNavBadge">0</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div style="font-size:12px; color:var(--text-muted); padding:8px 14px; display:flex; align-items:center; gap:8px;">
+          <kbd style="font-family:var(--font-mono); background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:2px 6px; font-size:11px;">/</kbd>
+          <span>Tekan / untuk cari</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Top Header -->
+    <header class="mobile-header">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="brand-icon" style="width:30px; height:30px; font-size:13px; border-radius:9px;">P+</div>
+        <b style="font-size:16px;">Prompt Visual</b>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button data-view="composer" style="padding:6px; color:var(--text-main);" aria-label="Buka Prompt Studio">
+          <svg style="width:22px; height:22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#icon-sparkle"/></svg>
+        </button>
+        <button data-view="saved" style="padding:6px; color:var(--text-main);" aria-label="Lihat Tersimpan">
+          <svg style="width:22px; height:22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#icon-save"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      <div class="content-container">
+
+        <!-- Profile Hero Section -->
+        <section class="profile-card">
+          <div class="profile-grid">
+            <div class="avatar-ring">
+              <div class="avatar-inner">P+</div>
+            </div>
+            <div class="profile-info">
+              <div class="profile-title-row">
+                <h1 class="profile-username">kamus.prompt.visual</h1>
+                <span class="verified-badge" title="Terverifikasi">✓</span>
+                <div class="btn-action-group">
+                  <button class="btn-action primary" id="btnExploreAll">Jelajahi 1.322 Kode</button>
+                  <button class="btn-action" id="btnComposePrompt">Susun Prompt</button>
+                </div>
+              </div>
+
+              <div class="profile-stats">
+                <div class="stat-chip"><b id="groupCount">41</b> Kelompok Visual</div>
+                <div class="stat-chip"><b id="codeCount">1.322</b> Shortcode AI</div>
+                <div class="stat-chip"><b id="savedCount">0</b> Tersimpan</div>
+              </div>
+
+              <div class="profile-bio">
+                <b>Pustaka Visual & Shortcode Prompt Multimodal</b>
+                Pilih gaya visual, sesuaikan nama subjek secara langsung, dan salin prompt berstandar industri untuk Midjourney, Veo, Stable Diffusion, dan ChatGPT.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Highlights / Stories Carousel -->
+        <section class="stories-section" aria-label="Sorotan Kelompok Visual">
+          <button class="carousel-btn prev" id="carouselPrev" aria-label="Geser ke kiri">‹</button>
+          <div class="stories-carousel" id="storiesCarousel"></div>
+          <button class="carousel-btn next" id="carouselNext" aria-label="Geser ke kanan">›</button>
+        </section>
+
+        <!-- Search Bar Global -->
+        <section class="search-filter-card">
+          <div class="search-input-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24"><use href="#icon-search"/></svg>
+            <input type="text" class="search-input" id="globalSearchInput" placeholder="Cari shortcode, kategori, gaya kamera, atau efek (contoh: smoke, cgi, drone, loop)..." aria-label="Cari shortcode atau kelompok">
+            <button class="search-clear" id="searchClearBtn" aria-label="Bersihkan pencarian">×</button>
+            <kbd class="kbd-shortcut hide-mobile">/</kbd>
+          </div>
+        </section>
+
+        <!-- Main View Tabs Navigation -->
+        <nav class="view-tabs" aria-label="Navigasi Tampilan">
+          <button class="view-tab active" data-view="feed">
+            <svg class="icon"><use href="#icon-grid"/></svg>
+            Postingan
+          </button>
+          <button class="view-tab" data-view="reels">
+            <svg class="icon"><use href="#icon-reels"/></svg>
+            Reels
+          </button>
+          <button class="view-tab" data-view="explorer">
+            <svg class="icon"><use href="#icon-explorer"/></svg>
+            Kamus Lengkap
+          </button>
+          <button class="view-tab" data-view="composer">
+            <svg class="icon"><use href="#icon-sparkle"/></svg>
+            Prompt Studio
+          </button>
+          <button class="view-tab" data-view="saved">
+            <svg class="icon"><use href="#icon-save"/></svg>
+            Tersimpan
+          </button>
+        </nav>
+
+        <!-- SECTION 1: FEED GRID (Postingan / Reels / Saved) -->
+        <section id="feedSection">
+          <div class="groups-feed" id="feedGrid"></div>
+        </section>
+
+        <!-- SECTION 2: GRANULAR EXPLORER (1.322 ALL CODES) -->
+        <section id="explorerSection" style="display:none;">
+          <div class="explorer-toolbar">
+            <select class="select-custom" id="explorerMediaSelect" aria-label="Filter Media">
+              <option value="">Semua Media</option>
+              <option value="Image">Image (Gambar)</option>
+              <option value="Video">Video</option>
+              <option value="Hybrid">Hybrid (Gambar & Video)</option>
+              <option value="Content">Content (Teks & Editorial)</option>
+            </select>
+            <select class="select-custom" id="explorerFamilySelect" aria-label="Filter Keluarga Fungsi">
+              <option value="">Semua Keluarga Fungsi</option>
+            </select>
+            <span class="badge-count" id="explorerTotalBadge" style="margin-left:auto;">1.322 Shortcode</span>
+          </div>
+          <div class="codes-grid" id="explorerGrid"></div>
+          <div class="pagination-bar" id="explorerPager"></div>
+        </section>
+
+        <!-- SECTION 3: PROMPT STUDIO (COMPOSER) -->
+        <section id="composerSection" style="display:none;">
+          <div class="composer-view">
+            <!-- Left Config Panel -->
+            <div class="composer-panel">
+              <h3>
+                <svg style="width:20px;height:20px;color:#818cf8;" viewBox="0 0 24 24"><use href="#icon-sparkle"/></svg>
+                Peramu Brief Prompt
+              </h3>
+              
+              <div class="form-group">
+                <label class="form-label" for="composerSubject">Subjek / Produk Utama</label>
+                <input class="form-input" id="composerSubject" value="Botol parfum kaca mewah dengan embun dingin" placeholder="Tuliskan nama produk atau subjek Anda...">
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="composerPresetSelect">Preset Industri</label>
+                  <select class="form-select" id="composerPresetSelect">
+                    <option value="">Pilih Preset Siap Pakai...</option>
+                    <option value="product">Product Commercial Ad</option>
+                    <option value="wedding">Wedding / Event Visual</option>
+                    <option value="food">Food & Beverage Commercial</option>
+                    <option value="fashion">Fashion Editorial</option>
+                    <option value="ugc">UGC / Creator Smartphone Review</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="composerMode">Mode Output</label>
+                  <select class="form-select" id="composerMode">
+                    <option value="image">Gambar (Still Image)</option>
+                    <option value="video">Video (Veo / Motion)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="composerRatio">Rasio Aspek</label>
+                  <select class="form-select" id="composerRatio">
+                    <option value="16:9">16:9 (Lanskap)</option>
+                    <option value="9:16">9:16 (Vertikal / Reels)</option>
+                    <option value="1:1">1:1 (Persegi)</option>
+                    <option value="4:5">4:5 (Feed Portrait)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="composerDuration">Durasi Video</label>
+                  <select class="form-select" id="composerDuration">
+                    <option value="5 seconds">5 Detik</option>
+                    <option value="8 seconds">8 Detik</option>
+                    <option value="10 seconds">10 Detik</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="composerLighting">Lighting & Suasana</label>
+                <input class="form-input" id="composerLighting" value="studio commercial lighting, elegant soft volumetric glow, crisp reflections">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="composerConstraints">Batasan & Lock Konsistensi</label>
+                <input class="form-input" id="composerConstraints" value="preserve exact product geometry, label and logo; no extra unwanted text; clean frame">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Shortcode Terpilih di Studio</label>
+                <div class="selected-tags-box" id="composerSelectedTags"></div>
+              </div>
+
+              <button class="btn-action" id="composerClearBtn" style="font-size:12px;">Kosongkan Pilihan Shortcode</button>
+            </div>
+
+            <!-- Right Output Panel -->
+            <div class="composer-panel">
+              <h3>
+                <svg style="width:20px;height:20px;color:#38bdf8;" viewBox="0 0 24 24"><use href="#icon-copy"/></svg>
+                Prompt Terpadu Siap Pakai
+              </h3>
+              <textarea class="composer-output-box" id="composerOutput" readonly></textarea>
+              <div style="margin-top:14px; display:flex; gap:10px;">
+                <button class="btn-action primary" id="composerCopyBtn" style="flex:1; height:42px;">
+                  Salin Prompt Lengkap
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav" aria-label="Navigasi Bawah Seluler">
+      <button class="bottom-nav-btn active" data-view="feed">
+        <svg class="icon"><use href="#icon-home"/></svg>
+        <span>Beranda</span>
+      </button>
+      <button class="bottom-nav-btn" data-view="reels">
+        <svg class="icon"><use href="#icon-reels"/></svg>
+        <span>Reels</span>
+      </button>
+      <button class="bottom-nav-btn" data-view="explorer">
+        <svg class="icon"><use href="#icon-explorer"/></svg>
+        <span>Kamus</span>
+      </button>
+      <button class="bottom-nav-btn" data-view="composer">
+        <svg class="icon"><use href="#icon-sparkle"/></svg>
+        <span>Studio</span>
+      </button>
+      <button class="bottom-nav-btn" data-view="saved">
+        <svg class="icon"><use href="#icon-save"/></svg>
+        <span>Tersimpan</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- MODAL DIALOG (Instagram Post Detail & Galeri Multi-Shot) -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalGroupTitle">
+    <div class="modal-dialog">
+      
+      <!-- Sisi Kiri: Galeri Hasil & Inspirasi Visual -->
+      <div class="modal-media-side">
+        <div class="modal-gallery-grid" id="modalGalleryGrid"></div>
+      </div>
+
+      <!-- Sisi Kanan: Kontrol, Subjek Dinamis & Daftar Shortcode -->
+      <div class="modal-info-side">
+        <header class="modal-header">
+          <div class="modal-avatar-mini">P+</div>
+          <div class="modal-header-text">
+            <b>kamus.prompt.visual</b>
+            <small id="modalCollectionName">Koleksi Visual</small>
+          </div>
+          <button class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup Dialog">×</button>
+        </header>
+
+        <div class="modal-group-summary">
+          <h2 class="modal-group-title" id="modalGroupTitle">Judul Kelompok</h2>
+          <p class="modal-group-desc" id="modalGroupDesc">Deskripsi kelompok visual.</p>
+        </div>
+
+        <!-- Live Subject Replacer Bar -->
+        <div class="modal-subject-bar">
+          <span class="subject-label">Subjek:</span>
+          <input type="text" class="subject-input" id="modalSubjectInput" placeholder="Ketik nama produk atau subjek Anda...">
+        </div>
+
+        <!-- Scrollable Shortcode List -->
+        <div class="modal-codes-list" id="modalCodesList"></div>
+
+        <!-- Detail Drawer Active Code -->
+        <div class="modal-short-detail" id="modalShortDetail"></div>
+
+        <!-- Footer Actions -->
+        <footer class="modal-footer-actions">
+          <button class="btn-action primary" id="modalSaveGroupBtn">Simpan Kelompok</button>
+          <button class="btn-action" id="modalCopyAllBtn">Salin Semua Shortcode</button>
+        </footer>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-notice" id="toastNotice"></div>
+
+  <!-- Scripts -->
+  <script src="./kamus-data-v4.js"></script>
+  <script src="./app-pro.js"></script>
+</body>
+</html>
