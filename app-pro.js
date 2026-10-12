@@ -13,7 +13,7 @@
 
   // --- STATE MANAGEMENT ---
   const STATE = {
-    view: 'feed', // 'feed' | 'reels' | 'explorer' | 'saved' | 'composer'
+    view: 'feed', // 'feed' | 'motion' | 'explorer' | 'saved' | 'composer'
     theme: 'light',
     searchQuery: '',
     selectedSubject: 'produk atau subjek Anda',
@@ -48,53 +48,53 @@
 
   // --- 41 VISUAL GROUPS DEFINITIONS ---
   const BASE_GROUPS = [
-    { id: 'reveal', title: 'Reveal', desc: 'Cara kreatif menampilkan produk melalui asap, cairan, partikel, cahaya, dan material.', img: 'assets/groups/reveal.jpg', collection: 'Product Ads · Part 1', codes: ['smoke reveal','liquid reveal','particle reveal','ice break reveal','flower bloom reveal','fabric reveal','sand reveal','shadow reveal','portal reveal','light sweep reveal'] },
-    { id: 'cgi-3d', title: 'CGI & 3D', desc: 'Produk dalam adegan tiga dimensi, billboard, hologram, kaca, chrome, dan orbit.', img: 'assets/groups/cgi-3d.jpg', collection: 'Product Ads · Part 1', codes: ['3D billboard','floating product','exploded view','parts assembly','360 orbit','hologram product','glass sculpture','chrome world','product cube','neon 3D ad'] },
-    { id: 'miniature', title: 'Miniature World', desc: 'Dunia kecil dengan pekerja mini dan produk sebagai pusat adegan.', img: 'assets/groups/miniature.jpg', collection: 'Product Ads · Part 1', codes: ['miniature factory','tiny workers','miniature kitchen','tiny delivery crew','miniature construction','miniature lab','tiny farmers','miniature city','tiny workers cleaning','miniature garden'] },
-    { id: 'ugc-social', title: 'UGC & Social', desc: 'Konten natural seperti kreator untuk demo, reaksi, ulasan, dan rutinitas.', img: 'assets/groups/ugc-social.jpg', collection: 'Product Ads · Part 1', codes: ['UGC unboxing','UGC reaction','UGC before after','UGC product test','UGC morning routine','UGC get ready','UGC honest review','UGC viral hook','UGC lifestyle','UGC problem solution'] },
-    { id: 'pov-hand', title: 'POV & Hand Demo', desc: 'Interaksi tangan dan sudut pandang orang pertama untuk demonstrasi produk.', img: 'assets/groups/pov-hand.jpg', collection: 'Product Ads · Part 1', codes: ['POV unboxing','POV product grab','POV product test','POV package opening','POV beauty routine','POV drink pour','POV first person','hand interaction','hand swipe transition','hand catch product'] },
-    { id: 'transformation', title: 'Transformation', desc: 'Transformasi objek, bahan, kemasan, cairan, dan sketsa menjadi produk.', img: 'assets/groups/transformation.jpg', collection: 'Product Ads · Part 2', codes: ['product transformation','object product morph','ingredient product morph','package transformation','liquid product morph','flower product morph','fabric product morph','particle product assembly','sketch to product','raw to luxury'] },
-    { id: 'giant-product', title: 'Giant Product', desc: 'Produk raksasa di kota, gedung, pantai, landmark, dan ruang publik.', img: 'assets/groups/giant-product.jpg', collection: 'Product Ads · Part 2', codes: ['giant product city','product city takeover','giant rooftop product','giant street product','giant beach product','giant floating product','product billboard escape','building product transformation','giant vending machine','product landmark takeover'] },
-    { id: 'luxury-beauty', title: 'Luxury & Beauty', desc: 'Visual premium untuk parfum, kosmetik, perhiasan, sutra, kristal, dan runway.', img: 'assets/groups/luxury-beauty.jpg', collection: 'Product Ads · Part 2', codes: ['luxury pedestal reveal','silk product reveal','gold dust reveal','crystal product world','perfume mist reveal','mirror product world','beauty macro cinematic','luxury water reflection','jewelry sparkle reveal','runway product reveal'] },
-    { id: 'food-beverage', title: 'Food & Beverage', desc: 'Ledakan bahan, splash, vortex, buah, kopi, dan perjalanan macro makanan.', img: 'assets/groups/food-beverage.jpg', collection: 'Product Ads · Part 2', codes: ['ingredient explosion','floating ingredients','ingredient assembly','splash product reveal','drink vortex','ice cube explosion','coffee bean storm','fruit burst ad','food macro journey','package to ingredients'] },
-    { id: 'surreal-viral', title: 'Surreal & Viral', desc: 'Dunia mustahil, portal, teleportasi, tunnel, glitch, dan pergeseran skala.', img: 'assets/groups/surreal-viral.jpg', collection: 'Product Ads · Part 2', codes: ['impossible product world','product portal journey','gravity product ad','product teleportation','infinite product tunnel','product world transition','product dimension break','surreal scale shift','product reality glitch','cinematic product loop'] }
+    { id: 'reveal', title: 'Reveal & Unveiling', desc: 'Cara kreatif menampilkan produk melalui asap, cairan, partikel, cahaya, dan material.', img: 'assets/groups/reveal.jpg', collection: 'Product Ads · Part 1', codes: ['smoke reveal','liquid reveal','particle reveal','ice break reveal','flower bloom reveal','fabric reveal','sand reveal','shadow reveal','portal reveal','light sweep reveal'] },
+    { id: 'cgi-3d', title: 'CGI & 3D Billboard', desc: 'Produk dalam adegan tiga dimensi, billboard anamorphic, hologram, chrome, dan orbit.', img: 'assets/groups/cgi-3d.jpg', collection: 'Product Ads · Part 1', codes: ['3D billboard','floating product','exploded view','parts assembly','360 orbit','hologram product','glass sculpture','chrome world','product cube','neon 3D ad'] },
+    { id: 'miniature', title: 'Miniature World', desc: 'Dunia mikroskopis dengan pekerja mini dan produk berskala raksasa sebagai pusat adegan.', img: 'assets/groups/miniature.jpg', collection: 'Product Ads · Part 1', codes: ['miniature factory','tiny workers','miniature kitchen','tiny delivery crew','miniature construction','miniature lab','tiny farmers','miniature city','tiny workers cleaning','miniature garden'] },
+    { id: 'ugc-social', title: 'UGC & Creator Social', desc: 'Gaya video autentik kreator smartphone: unboxing, reaksi, ulasan jujur, dan rutinitas.', img: 'assets/groups/ugc-social.jpg', collection: 'Product Ads · Part 1', codes: ['UGC unboxing','UGC reaction','UGC before after','UGC product test','UGC morning routine','UGC get ready','UGC honest review','UGC viral hook','UGC lifestyle','UGC problem solution'] },
+    { id: 'pov-hand', title: 'POV & Hand Interaction', desc: 'Interaksi tangan orang pertama (POV) untuk demonstrasi sentuhan dan pemakaian produk.', img: 'assets/groups/pov-hand.jpg', collection: 'Product Ads · Part 1', codes: ['POV unboxing','POV product grab','POV product test','POV package opening','POV beauty routine','POV drink pour','POV first person','hand interaction','hand swipe transition','hand catch product'] },
+    { id: 'transformation', title: 'Object Transformation', desc: 'Transformasi mulus bahan mentah, kemasan, cairan, dan sketsa menjadi produk akhir.', img: 'assets/groups/transformation.jpg', collection: 'Product Ads · Part 2', codes: ['product transformation','object product morph','ingredient product morph','package transformation','liquid product morph','flower product morph','fabric product morph','particle product assembly','sketch to product','raw to luxury'] },
+    { id: 'giant-product', title: 'Giant Public Product', desc: 'Instalasi produk raksasa di ruang publik, rooftop gedung, pantai, dan jalanan kota.', img: 'assets/groups/giant-product.jpg', collection: 'Product Ads · Part 2', codes: ['giant product city','product city takeover','giant rooftop product','giant street product','giant beach product','giant floating product','product billboard escape','building product transformation','giant vending machine','product landmark takeover'] },
+    { id: 'luxury-beauty', title: 'Luxury & High Beauty', desc: 'Visual estetik mewah parfum, kosmetik, perhiasan emas, sutra mengalir, dan panggung runway.', img: 'assets/groups/luxury-beauty.jpg', collection: 'Product Ads · Part 2', codes: ['luxury pedestal reveal','silk product reveal','gold dust reveal','crystal product world','perfume mist reveal','mirror product world','beauty macro cinematic','luxury water reflection','jewelry sparkle reveal','runway product reveal'] },
+    { id: 'food-beverage', title: 'Food & Beverage Splash', desc: 'Ledakan bahan segar, cipratan cairan (splash), pusaran vortex, dan macro appetizing.', img: 'assets/groups/food-beverage.jpg', collection: 'Product Ads · Part 2', codes: ['ingredient explosion','floating ingredients','ingredient assembly','splash product reveal','drink vortex','ice cube explosion','coffee bean storm','fruit burst ad','food macro journey','package to ingredients'] },
+    { id: 'surreal-viral', title: 'Surreal & Viral Effects', desc: 'Visual surealis viral: portal dimensi, teleportasi, gravitasi nol, dan ilusi visual memukau.', img: 'assets/groups/surreal-viral.jpg', collection: 'Product Ads · Part 2', codes: ['impossible product world','product portal journey','gravity product ad','product teleportation','infinite product tunnel','product world transition','product dimension break','surreal scale shift','product reality glitch','cinematic product loop'] }
   ];
 
   const GENERATED_SPECS = [
-    ['editorial-portrait','Editorial & Portrait','Editorial Portrait','Portrait editorial, fashion, campaign, dan pencahayaan majalah.'],
-    ['cinematic-scene','Cinematic Style & Scene','Cinematic Scene','Grammar adegan film, mood, staging, atmosfer, dan pencahayaan sinematik.'],
-    ['advertising-ooh','Advertising & OOH','Advertising & OOH','Billboard, kampanye luar ruang, aktivasi merek, dan media iklan besar.'],
-    ['product-anatomy','Product Anatomy & Technical','Product Anatomy','Cutaway, exploded view, lapisan material, dan visual teknis produk.'],
-    ['typography-motion','Typography & Motion Graphics','Typography','Tipografi, monogram, judul, serta motion graphic.'],
-    ['looping-continuity','Looping & Temporal Continuity','Perfect Loop','Gerakan berulang mulus dengan kontinuitas awal dan akhir.'],
-    ['chroma-overlay','Chroma Key & Overlay','Chroma & Overlay','Subjek siap compositing, chroma key, overlay, dan live camera.'],
-    ['led-videotron','LED / Videotron','LED & Videotron','Visual panggung, videotron, LED background, dan event screen.'],
-    ['reference-editing','Reference Editing','Reference Editing','Editing gambar dengan identitas dan elemen utama tetap terjaga.'],
-    ['selective-animation','Selective Animation','Selective Motion','Menganimasikan elemen tertentu sementara bagian lain tetap diam.'],
-    ['storyboard-continuity','Storyboard & Scene Continuity','Storyboard','Rangkaian shot, urutan cerita, dan konsistensi antaradegan.'],
-    ['production-safety','Production Safety & Constraints','Production Safety','Constraint produksi untuk stabilitas wajah, produk, teks, dan gerak.'],
-    ['news-editorial','News & Editorial Content','News Editorial','Berita, headline, artikel, bulletin, dan visual redaksional.'],
-    ['radio-podcast-social','Radio / Podcast / Social Content','Podcast & Social','Naskah radio, podcast, promo sosial, caption, dan distribusi konten.'],
-    ['bumper-opening','Bumper & Opening','Bumper & Opening','Opening, bumper, ident, logo reveal, dan intro program.'],
-    ['output-composition','Output & Composition','Output & Framing','Aspect ratio, layout, framing, safe area, dan komposisi keluaran.']
+    ['editorial-portrait','Editorial & Portrait','Editorial & Portrait Fashion','Portrait editorial bergaya majalah fashion kelas atas dengan pencahayaan studio terarah.'],
+    ['cinematic-scene','Cinematic Style & Scene','Sinematik & Suasana Film','Komposisi adegan film, tata cahaya dramatis, atmosfer mood mendalam, dan lensa sinematik.'],
+    ['advertising-ooh','Advertising & OOH','Periklanan OOH & Billboard','Aktivasi kampanye luar ruang, videotron kota, papan reklame LED raksasa, dan media iklan besar.'],
+    ['product-anatomy','Product Anatomy & Technical','Anatomi & Cutaway Produk','Lapisan internal, visual exploded view teknis, material presisi, dan perakitan komponen.'],
+    ['typography-motion','Typography & Motion Graphics','Tipografi & Motion Graphics','Desain huruf dinamis, monogram gerak, judul sinematik, serta elemen grafis kinetik.'],
+    ['looping-continuity','Looping & Temporal Continuity','Gerakan Looping Sempurna','Kontinuitas temporal awal dan akhir yang menyatu mulus untuk video animasi tanpa jeda.'],
+    ['chroma-overlay','Chroma Key & Overlay','Chroma Key & Compositing','Subjek latar hijau/biru bersih siap olah compositing, live action layer, dan integrasi VFX.'],
+    ['led-videotron','LED / Videotron','Panggung LED & Videotron','Visual dinamis layar panggung konser, backdrop videotron resolusi tinggi, dan visual ambience.'],
+    ['reference-editing','Reference Editing','Editing Berbasis Referensi','Teknik modifikasi gambar dengan mempertahankan identitas wajah, geometri produk, dan warna utama.'],
+    ['selective-animation','Selective Animation','Animasi Gerak Selektif','Teknik menggerakkan elemen spesifik (asap/air/kain) sementara subjek utama tetap terkunci diam.'],
+    ['storyboard-continuity','Storyboard & Scene Continuity','Storyboard & Urutan Adegan','Rangkaian multi-shot cerita sinematik dengan kesinambungan karakter, pencahayaan, dan latar.'],
+    ['production-safety','Production Safety & Constraints','Keamanan Produksi & Batasan','Parameter batas kontrol untuk mencegah distorsi wajah, cacat anatomi, dan menjaga stabilitas AI.'],
+    ['news-editorial','News & Editorial Content','Berita & Editorial Redaksional','Penyajian visual jurnalisme, studio siaran berita, teks headline, dan siaran live.'],
+    ['radio-podcast-social','Radio / Podcast / Social Content','Podcast & Format Sosial','Visual studio podcast berkualitas tinggi, dialog mic broadcast, dan konten sosial interaktif.'],
+    ['bumper-opening','Bumper & Opening','Bumper & Opening Logo','Animasi bumper pembuka siaran, reveal logo dramatis, dan transisi stasiun TV/kanal.'],
+    ['output-composition','Output & Composition','Komposisi & Rasio Aspek','Panduan framing, safe area media sosial, rasio aspek 16:9/9:16/4:5, dan harmoni komposisi.']
   ];
 
   const REFERENCE_SPECS = [
-    ['ref-product-layers',0,'Product Layer Codes','productlayer','Struktur produk, material, cutaway, lapisan, formula, dan komponen teknis.'],
-    ['ref-movie-posters',1,'Movie Poster Codes','movieposter','Bahasa visual poster film: genre, karakter, atmosfer, dan komposisi dramatik.'],
-    ['ref-physical-actions',2,'Physical Action Codes','physicalaction','Aksi fisik temporal untuk merakit, membuka, membungkus, melipat, dan mentransformasi.'],
-    ['ref-product-150',3,'150 Product Shortcuts','150product','Kumpulan besar fotografi produk, iklan komersial, reveal, dan presentasi premium.'],
-    ['ref-creative-pov',4,'Creative POV Codes','50creativepov','Sudut pandang kreatif, first-person, hand demo, dan perspektif imersif.'],
-    ['ref-master-list',5,'Master List 101–200','masterlist','Kumpulan lanjutan lintas gaya untuk eksplorasi visual dan pengembangan konsep.'],
-    ['ref-layered-image',6,'Layered Image Codes','100layered','Double exposure, composite portrait, reflection, texture, dan lapisan dunia visual.'],
-    ['ref-premium-product',7,'Premium Product Codes','100premium','Visual produk kelas premium dengan set, lighting, material, dan skala iklan.'],
-    ['ref-surreal-world',8,'Surreal World Codes','100surreal','Transformasi dunia, ruang, skala, kota, alam, dan dimensi sureal.'],
-    ['ref-product-ads-1',9,'Product Ads · Part 1','100aivideopromptcodesforproductads','Reveal, CGI 3D, miniature world, UGC, serta POV hand demo.',0,50],
-    ['ref-product-ads-2',10,'Product Ads · Part 2','100aivideopromptcodesforproductads','Transformation, giant product, luxury, food, serta dunia sureal viral.',50,100],
-    ['ref-cinematic-frames',11,'Cinematic Movie Frames','cinematicmovieframe','Frame film dengan staging, pencahayaan, lensa, atmosfer, dan narrative composition.'],
-    ['ref-camera-angles',12,'Creative Camera Angles','cameraangles','Sudut kamera editorial, perspektif dramatis, framing, dan placement subjek.'],
-    ['ref-camera-movement',13,'120 Camera Movements','120cameramovement','Dolly, pan, tilt, orbit, tracking, drone, FPV, handheld, dan compound movement.'],
-    ['ref-extreme-zoom',14,'Extreme Zoom-In Codes','extremezoom','Perjalanan kamera dari ruang luas menuju detail subjek secara sinematik.']
+    ['ref-product-layers',0,'Product Layer Codes','productlayer','Panduan struktur material, cutaway produk, lapisan internal, formula, dan komponen manufaktur.'],
+    ['ref-movie-posters',1,'Movie Poster Codes','movieposter','Grammar visual poster film komersial: genre bioskop, karakter utama, tone warna, dan judul dramatis.'],
+    ['ref-physical-actions',2,'Physical Action Codes','physicalaction','Kumpulan instruksi gerak fisik nyata: merakit, membuka, melipat, menuang, dan interaksi kinetik.'],
+    ['ref-product-150',3,'150 Product Shortcuts','150product','Kompilasi komprehensif 150 teknik fotografi & promosi produk komersial kelas studio.'],
+    ['ref-creative-pov',4,'Creative POV Codes','50creativepov','Sudut pandang orang pertama imersif, interaksi tangan, serta sensasi visual pengguna langsung.'],
+    ['ref-master-list',5,'Master List 101–200','masterlist','Daftar induk lanjutan shortcode multimodal lintas gaya visual untuk eksplorasi kreatif mendalam.'],
+    ['ref-layered-image',6,'Layered Image Codes','100layered','Teknik double exposure visual, potret komposit transparan, bayangan reflektif, dan perpaduan tekstur.'],
+    ['ref-premium-product',7,'Premium Product Codes','100premium','Standar visual komersial produk mewah dengan tata panggung eksklusif dan lighting kristal.'],
+    ['ref-surreal-world',8,'Surreal World Codes','100surreal','Transformasi surealis berskala masif: lanskap melayang, anomali gravitasi, dan dunia imajinatif.'],
+    ['ref-product-ads-1',9,'Product Ads · Part 1','100aivideopromptcodesforproductads','Bagian 1 formula iklan produk: Reveal, efek 3D CGI, dunia miniatur, UGC kreator, dan POV demo.',0,50],
+    ['ref-product-ads-2',10,'Product Ads · Part 2','100aivideopromptcodesforproductads','Bagian 2 formula iklan produk: Morfogenesis transformasi, produk raksasa, kemewahan, dan efek viral.',50,100],
+    ['ref-cinematic-frames',11,'Cinematic Movie Frames','cinematicmovieframe','Kaidah sinematografi layar lebar: staging adegan, tata cahaya filmik, pemilihan lensa, dan mood naratif.'],
+    ['ref-camera-angles',12,'Creative Camera Angles','cameraangles','Sudut penempatan kamera sinematik: low angle heroik, bird eye view, over-the-shoulder, dan Dutch tilt.'],
+    ['ref-camera-movement',13,'120 Camera Movements','120cameramovement','120 manuver gerakan kamera: dolly in/out, pan, tilt, orbital tracking, drone sweep, dan kamera genggam dinamis.'],
+    ['ref-extreme-zoom',14,'Extreme Zoom-In Codes','extremezoom','Teknik perjalanan kamera berkelanjutan dari sudut pandang luas (wide) menembus detail mikroskopis produk.']
   ];
 
   const GROUPS = [...BASE_GROUPS];
@@ -127,17 +127,42 @@
     });
   });
 
-  // Urutkan grup agar referensi asli rapi di belakang
-  GROUPS.sort((a, b) => Number(b.kind === 'reference') - Number(a.kind === 'reference'));
+  // Urutkan grup: karya visual sinematik & studio di urutan depan untuk visual first impression terbaik
+  GROUPS.sort((a, b) => Number(a.kind === 'reference') - Number(b.kind === 'reference'));
 
   // --- HELPER FUNCTIONS ---
   function groupEntries(g) {
     return g.family ? DATA.filter(e => e.family === g.family) : g.codes.map(findEntry).filter(Boolean);
   }
 
-  function isReelGroup(g) {
+  // Filter cerdas untuk kelompok Video & Motion AI
+  const MOTION_SPECIFIC_IDS = new Set([
+    'ref-camera-movement',
+    'ref-camera-angles',
+    'ref-extreme-zoom',
+    'ref-physical-actions',
+    'ref-product-ads-1',
+    'ref-product-ads-2',
+    'ref-cinematic-frames',
+    'looping-continuity',
+    'selective-animation',
+    'storyboard-continuity',
+    'bumper-opening',
+    'reveal',
+    'transformation',
+    'cgi-3d',
+    'ugc-social',
+    'pov-hand',
+    'food-beverage',
+    'surreal-viral'
+  ]);
+
+  function isMotionGroup(g) {
+    if (MOTION_SPECIFIC_IDS.has(g.id)) return true;
     const es = groupEntries(g);
-    return es.length && es.filter(e => e.media === 'Video' || e.media === 'Hybrid').length / es.length >= 0.45;
+    if (!es.length) return false;
+    const motionCount = es.filter(e => e.media === 'Video' || e.media === 'Hybrid').length;
+    return (motionCount / es.length) >= 0.35;
   }
 
   function getCleanPrompt(code, customSubject) {
@@ -210,7 +235,7 @@
     });
   }
 
-  // --- RENDER VISUAL FEED (POSTINGAN / REELS / SAVED) ---
+  // --- RENDER VISUAL FEED (POSTINGAN / VIDEO & MOTION / SAVED) ---
   function renderFeed() {
     const feed = $('#feedGrid');
     if (!feed) return;
@@ -219,8 +244,8 @@
 
     if (STATE.view === 'saved') {
       list = list.filter(g => STATE.savedGroups.has(g.id));
-    } else if (STATE.view === 'reels') {
-      list = list.filter(isReelGroup);
+    } else if (STATE.view === 'motion' || STATE.view === 'reels') {
+      list = list.filter(isMotionGroup);
     }
 
     if (STATE.searchQuery) {
@@ -229,16 +254,17 @@
     }
 
     // Update stats header
-    $('#groupCount').textContent = GROUPS.length;
-    $('#codeCount').textContent = DATA.length.toLocaleString('id-ID');
-    $('#savedCount').textContent = STATE.savedGroups.size;
+    if ($('#groupCount')) $('#groupCount').textContent = GROUPS.length;
+    if ($('#codeCount')) $('#codeCount').textContent = DATA.length.toLocaleString('id-ID');
+    if ($('#savedCount')) $('#savedCount').textContent = STATE.savedGroups.size;
+    if ($('#savedNavBadge')) $('#savedNavBadge').textContent = STATE.savedGroups.size;
 
     if (!list.length) {
       feed.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-state-icon">🔍</div>
-          <h3>Tidak ada kelompok ditemukan</h3>
-          <p>Coba kata kunci lain atau bersihkan filter pencarian.</p>
+        <div class="empty-state" style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg);">
+          <div style="font-size: 40px; margin-bottom: 12px;">🔍</div>
+          <h3 style="font-size: 17px; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">Tidak ada kelompok ditemukan</h3>
+          <p style="font-size: 13px; color: var(--text-muted);">Coba gunakan kata kunci lain atau bersihkan filter pencarian Anda.</p>
         </div>
       `;
       return;
@@ -246,21 +272,34 @@
 
     feed.innerHTML = list.map(g => {
       const entries = groupEntries(g);
-      const mediaTypes = [...new Set(entries.map(e => e.media))].slice(0, 3).join(' · ') || 'Visual';
-      const label = g.kind === 'reference' ? 'Referensi Asli' : g.family ? 'Koleksi AI' : 'Koleksi Visual';
+      const isMotion = isMotionGroup(g);
+      const mediaTypes = [...new Set(entries.map(e => e.media))].slice(0, 3).join(' · ') || (isMotion ? 'Video' : 'Gambar');
+      const label = g.kind === 'reference' ? 'Cheat Sheet' : isMotion ? 'Video & Motion' : 'Koleksi Visual';
+
+      // Ambil 3 contoh shortcode unggulan untuk kartu yang informatif & menarik
+      const sampleCodes = g.codes.slice(0, 3).map(c => '/' + String(c).replaceAll(' ', ''));
 
       return `
         <article class="group-post-card" data-id="${g.id}">
           <div class="group-card-media">
             <img class="group-card-img" src="${g.img}" alt="${g.title}" loading="lazy">
-            <span class="card-top-tag">${label}</span>
-            <span class="card-code-count">${g.codes.length} Shortcode</span>
           </div>
           <div class="card-body">
+            <div class="card-meta-row">
+              <span class="card-pill-tag ${isMotion ? 'motion' : g.kind === 'reference' ? 'ref' : ''}">${label}</span>
+              <span class="card-pill-count">${g.codes.length} Shortcode</span>
+            </div>
             <h3 class="card-title">${g.title}</h3>
             <p class="card-desc">${g.desc}</p>
+            
+            <!-- Cuplikan Shortcode Informatif -->
+            <div class="card-samples-row" title="Contoh shortcode dalam kelompok ini">
+              ${sampleCodes.map(code => `<span class="card-code-chip">${code}</span>`).join('')}
+              ${g.codes.length > 3 ? `<span class="card-code-chip more">+${g.codes.length - 3}</span>` : ''}
+            </div>
+
             <div class="card-footer">
-              <span>${mediaTypes}</span>
+              <span class="card-media-label">${mediaTypes}</span>
               <span class="card-action-hint">Lihat Prompt &rarr;</span>
             </div>
           </div>
@@ -477,12 +516,20 @@
     const galleryEl = $('#modalGalleryGrid');
     if (galleryEl) {
       galleryEl.innerHTML = gallery.map((g, i) => `
-        <figure class="gallery-shot">
-          <img src="${g.img}" alt="${g.title}">
+        <figure class="gallery-shot" data-img="${g.img}" data-caption="${g.title} · ${g.collection}" title="Klik untuk memperbesar tampilan penuh">
+          <img src="${g.img}" alt="${g.title}" loading="lazy">
           <span class="gallery-tag">${i === 0 ? 'Hasil Utama' : 'Inspirasi Terkait'}</span>
+          <span class="gallery-zoom-hint">
+            <svg style="width:12px;height:12px;" viewBox="0 0 24 24"><use href="#icon-zoom"/></svg>
+            Perbesar
+          </span>
           <figcaption class="gallery-caption">${i === 0 ? '/' + String(group.codes[0] || group.title).replaceAll(' ', '') : g.title}</figcaption>
         </figure>
       `).join('');
+
+      $$('.gallery-shot').forEach(fig => {
+        fig.onclick = () => openLightbox(fig.dataset.img, fig.dataset.caption);
+      });
     }
 
     $('#modalGroupTitle').textContent = group.title;
@@ -588,6 +635,21 @@
     document.body.style.overflow = '';
   }
 
+  // --- LIGHTBOX CONTROLLER ---
+  function openLightbox(src, caption) {
+    const overlay = $('#lightboxOverlay');
+    const img = $('#lightboxImg');
+    const cap = $('#lightboxCaption');
+    if (!overlay || !img) return;
+    img.src = src;
+    if (cap) cap.textContent = caption || '';
+    overlay.classList.add('open');
+  }
+
+  function closeLightbox() {
+    $('#lightboxOverlay')?.classList.remove('open');
+  }
+
   // --- GLOBAL SWITCH VIEW ---
   function switchView(viewName) {
     STATE.view = viewName;
@@ -658,13 +720,17 @@
       searchInput?.focus();
     });
 
-    // Keyboard shortcut '/' untuk search & 'Escape' untuk tutup modal
+    // Keyboard shortcut '/' untuk search & 'Escape' untuk tutup modal/lightbox
     document.addEventListener('keydown', e => {
       if (e.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
         e.preventDefault();
         searchInput?.focus();
       } else if (e.key === 'Escape') {
-        closeModal();
+        if ($('#lightboxOverlay')?.classList.contains('open')) {
+          closeLightbox();
+        } else {
+          closeModal();
+        }
       }
     });
 
@@ -710,6 +776,12 @@
     $('#modalCloseBtn')?.addEventListener('click', closeModal);
     $('#modalOverlay')?.addEventListener('click', e => {
       if (e.target === $('#modalOverlay')) closeModal();
+    });
+
+    // Lightbox Events
+    $('#lightboxClose')?.addEventListener('click', closeLightbox);
+    $('#lightboxOverlay')?.addEventListener('click', e => {
+      if (e.target === $('#lightboxOverlay') || e.target === $('#lightboxClose')) closeLightbox();
     });
 
     // Modal Live Subject Replacer

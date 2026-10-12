@@ -1,6 +1,6 @@
 /* ==========================================================================
-   KAMUS SHORTCODE PROMPT - CLEAN & BRIGHT DESIGN SYSTEM
-   Style: Apple / Stripe / Vercel Ultra-Clean Light Aesthetic
+   KAMUS SHORTCODE PROMPT - CLEAN & BRIGHT DESIGN SYSTEM (PRO STUDIO)
+   Style: Apple / Stripe Ultra-Clean Light Aesthetic
    Zero text clutter, high legibility, professional spacing & modern SVG icons
    ========================================================================== */
 
@@ -248,7 +248,7 @@ button {
   top: 0;
   z-index: 40;
   height: var(--header-h);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -262,21 +262,21 @@ button {
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  padding: 28px 32px;
+  padding: 26px 30px;
   margin-bottom: 24px;
   box-shadow: var(--shadow-subtle);
 }
 
 .profile-grid {
   display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
-  gap: 28px;
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 26px;
   align-items: center;
 }
 
 .avatar-ring {
-  width: 100px;
-  height: 100px;
+  width: 94px;
+  height: 94px;
   border-radius: 50%;
   padding: 3px;
   background: var(--ig-ring);
@@ -291,7 +291,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
   color: var(--primary);
   border: 3px solid #ffffff;
@@ -300,7 +300,7 @@ button {
 .profile-info {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
 }
 
@@ -312,7 +312,7 @@ button {
 }
 
 .profile-username {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--text-main);
   letter-spacing: -0.4px;
@@ -367,20 +367,20 @@ button {
 
 .profile-stats {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .stat-chip {
   background: var(--bg-surface-subtle);
   border: 1px solid var(--border);
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .stat-chip b {
@@ -389,26 +389,26 @@ button {
 }
 
 .profile-bio {
-  font-size: 13.5px;
+  font-size: 13px;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.5;
   border-top: 1px solid var(--border-subtle);
-  padding-top: 10px;
+  padding-top: 8px;
 }
 
 /* Stories / Highlights Carousel */
 .stories-section {
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 14px 18px;
+  padding: 12px 16px;
 }
 
 .stories-carousel {
   display: flex;
-  gap: 18px;
+  gap: 16px;
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -426,23 +426,23 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 7px;
-  width: 72px;
-  min-width: 72px;
+  gap: 6px;
+  width: 70px;
+  min-width: 70px;
   background: transparent;
   cursor: pointer;
 }
 
 .story-ring {
-  width: 66px;
-  height: 66px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   padding: 2.5px;
   background: var(--ig-ring);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .story-thumb {
@@ -564,7 +564,7 @@ button {
   display: flex;
   border-bottom: 1px solid var(--border);
   margin-bottom: 24px;
-  gap: 28px;
+  gap: 24px;
   justify-content: center;
 }
 
@@ -596,7 +596,10 @@ button {
   height: 17px;
 }
 
-/* Groups Feed - Zero Text Clutter */
+/* ==========================================================================
+   ENHANCED PROFESSIONAL COVER THUMBNAILS (Feed Grid)
+   ========================================================================== */
+
 .groups-feed {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -616,7 +619,7 @@ button {
 }
 
 .group-post-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-card-hover);
   border-color: #cbd5e1;
 }
@@ -627,47 +630,59 @@ button {
   aspect-ratio: 16 / 10;
   overflow: hidden;
   background: #f1f5f9;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .group-card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 20%;
   display: block;
-  transition: transform 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .group-post-card:hover .group-card-img {
   transform: scale(1.05);
 }
 
-.card-top-tag {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(6px);
-  color: var(--text-main);
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 10.5px;
-  font-weight: 750;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-.card-code-count {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(15, 23, 42, 0.85);
-  color: #ffffff;
-  padding: 3px 8px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 750;
+.card-meta-row {
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.card-pill-tag {
+  font-size: 10px;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--bg-surface-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.card-pill-tag.motion {
+  background: #fdf2f8;
+  color: #db2777;
+  border-color: #fbcfe8;
+}
+
+.card-pill-tag.ref {
+  background: #f0fdf4;
+  color: #16a34a;
+  border-color: #bbf7d0;
+}
+
+.card-pill-count {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-dim);
 }
 
 .card-body {
@@ -683,6 +698,7 @@ button {
   font-weight: 800;
   color: var(--text-main);
   line-height: 1.3;
+  letter-spacing: -0.2px;
 }
 
 .card-desc {
@@ -693,6 +709,33 @@ button {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 35px;
+}
+
+/* Sample Shortcode Chips (Informatif, Teratur, Bebas Penumpukan Teks) */
+.card-samples-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 4px 0 2px;
+}
+
+.card-code-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 750;
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid #c7d2fe;
+  padding: 2px 7px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.card-code-chip.more {
+  background: #f1f5f9;
+  color: var(--text-muted);
+  border-color: #e2e8f0;
 }
 
 .card-footer {
@@ -706,12 +749,25 @@ button {
   color: var(--text-dim);
 }
 
+.card-media-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
 .card-action-hint {
-  font-weight: 700;
+  font-weight: 750;
   color: var(--primary);
   display: flex;
   align-items: center;
   gap: 4px;
+  transition: transform 0.2s ease;
+}
+
+.group-post-card:hover .card-action-hint {
+  transform: translateX(3px);
 }
 
 /* Granular Explorer View */
@@ -934,7 +990,7 @@ button {
   color: var(--primary);
   font-family: var(--font-mono);
   font-size: 11.5px;
-  font-weight: 700;
+  font-weight: 750;
 }
 
 .selected-tag-remove {
@@ -962,7 +1018,10 @@ button {
   outline: none;
 }
 
-/* Modal Dialog Clean White */
+/* ==========================================================================
+   MODAL DIALOG & CLEAN GALLERY DISPLAY
+   ========================================================================== */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -981,21 +1040,21 @@ button {
 }
 
 .modal-dialog {
-  width: min(1160px, 96vw);
+  width: min(1180px, 96vw);
   height: min(840px, 92vh);
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-modal);
   display: grid;
-  grid-template-columns: 52% 48%;
+  grid-template-columns: 50% 50%;
   overflow: hidden;
 }
 
-/* Modal Media Side (Clean Grey Background) */
+/* Modal Media Side (Clean & Fully Visible Images) */
 .modal-media-side {
   background: var(--bg-surface-subtle);
-  padding: 18px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -1018,6 +1077,10 @@ button {
   background: #ffffff;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
 }
 
 .gallery-shot:first-child {
@@ -1027,22 +1090,38 @@ button {
 .gallery-shot img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: #ffffff;
   display: block;
 }
 
 .gallery-tag {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 8px;
+  left: 8px;
   padding: 3px 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.95);
   color: var(--text-main);
   font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.gallery-zoom-hint {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(15, 23, 42, 0.75);
+  color: #ffffff;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .gallery-caption {
@@ -1050,7 +1129,7 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 20px 10px 8px;
+  padding: 16px 10px 6px;
   background: linear-gradient(transparent, rgba(15, 23, 42, 0.82));
   color: #fff;
   font-size: 11px;
@@ -1283,6 +1362,64 @@ button {
   background: #ffffff;
 }
 
+/* Lightbox Modal (Full Resolution Image Viewer) */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(15, 23, 42, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.lightbox-overlay.open {
+  display: flex;
+}
+
+.lightbox-img {
+  max-width: 95vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  background: #ffffff;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.lightbox-caption {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 /* Toast Notice */
 .toast-notice {
   position: fixed;
@@ -1390,17 +1527,14 @@ button {
     padding: 4px 8px;
   }
   .groups-feed {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 14px;
   }
   .card-body {
-    padding: 10px 12px;
+    padding: 12px 14px;
   }
   .card-title {
-    font-size: 13px;
-  }
-  .card-desc {
-    display: none;
+    font-size: 14px;
   }
   .view-tabs {
     gap: 14px;
@@ -1424,7 +1558,7 @@ button {
     border-radius: 0;
     border: none;
     grid-template-columns: 1fr;
-    grid-template-rows: 42vh 58vh;
+    grid-template-rows: 44vh 56vh;
   }
   .modal-media-side {
     padding: 8px;
