@@ -31,8 +31,452 @@
     activeShortIndex: 0
   };
 
+  // --- SHORTCUT PROMPT LOGO (BRAND IDENTITY & LOGO STUDIO) ---
+  const LOGO_SHORTCODES = [
+    {
+      id: 2001,
+      code: '/logo',
+      title: 'logo',
+      display_name: 'logo',
+      media: 'Image',
+      category: 'Brand Identity',
+      use_case: 'Logo concept & mark',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Buat konsep logo',
+      example_prompt: '/logo /sport /bold /3d — YBS FUTSAL CLUB',
+      example_result: 'Konsep logo profesional berbasis vektor tajam, siluet ikonik, dan identitas visual yang mudah diingat.',
+      expanded_prompt: 'Create a distinct, high-impact professional logo design concept for {subject}. Clean vector aesthetic, balanced geometry, memorable iconic silhouette, versatile corporate brand identity on crisp white isolated background.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/logo', 'logo']
+    },
+    {
+      id: 2002,
+      code: '/brand',
+      title: 'brand',
+      display_name: 'brand',
+      media: 'Image',
+      category: 'Brand Identity',
+      use_case: 'Corporate identity',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Buat logo berdasarkan identitas brand',
+      example_prompt: '/logo /brand /minimal /modern — Tech Innovate',
+      example_result: 'Logo yang mencerminkan nilai inti dan filosofi identitas merek dengan pedoman visual korporat.',
+      expanded_prompt: 'Design a cohesive brand identity logo for {subject}. Deeply reflects brand values, core personality, modern corporate identity guidelines, scalable vector format, timeless brand signature.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/brand', 'brand']
+    },
+    {
+      id: 2003,
+      code: '/minimal',
+      title: 'minimal',
+      display_name: 'minimal',
+      media: 'Image',
+      category: 'Logo Style',
+      use_case: 'Minimalist logo',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo minimalis',
+      example_prompt: '/logo /premium /minimal /monogram — MDS STEEL',
+      example_result: 'Logo minimalis dengan garis esensial murni, komposisi ruang negatif seimbang, dan bentuk sederhana abadi.',
+      expanded_prompt: 'Minimalist clean logo design for {subject}. Refined geometric simplicity, essential lines, clever negative space balance, uncluttered, pure timeless modern minimalism on clean background.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/minimal', 'minimal']
+    },
+    {
+      id: 2004,
+      code: '/modern',
+      title: 'modern',
+      display_name: 'modern',
+      media: 'Image',
+      category: 'Logo Style',
+      use_case: 'Modern contemporary logo',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo modern',
+      example_prompt: '/logo /modern /icon — FinTech Next',
+      example_result: 'Gaya logo kontemporer modern dengan harmoni geometris mutakhir dan karakter visual masa kini.',
+      expanded_prompt: 'Ultra-modern contemporary logo mark for {subject}. Cutting-edge design language, sleek geometric harmony, forward-looking tech-forward aesthetic, crisp vector precision, sophisticated simplicity.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/modern', 'modern']
+    },
+    {
+      id: 2005,
+      code: '/premium',
+      title: 'premium',
+      display_name: 'premium',
+      media: 'Image',
+      category: 'Logo Style',
+      use_case: 'Premium luxury branding',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo mewah/premium',
+      example_prompt: '/logo /premium /minimal /monogram — MDS STEEL',
+      example_result: 'Logo dengan sentuhan mewah kelas atas, aksen eksklusif, keanggunan presisi, dan prestise brand tinggi.',
+      expanded_prompt: 'High-end prestigious premium logo design for {subject}. Bespoke refined craftsmanship, subtle metallic gold or silver sheen, upscale visual identity, elite brand aura, immaculate presentation.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/premium', 'premium']
+    },
+    {
+      id: 2006,
+      code: '/3d',
+      title: '3d',
+      display_name: '3d',
+      media: 'Image',
+      category: 'Visual Depth',
+      use_case: '3D dimensional logo',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo dengan efek 3D',
+      example_prompt: '/logo /sport /bold /3d — YBS FUTSAL CLUB',
+      example_result: 'Logo berdimensi 3D dengan tata cahaya realistis, bayangan kedalaman halus, bevel elegan, dan tekstur taktil.',
+      expanded_prompt: 'Dimensional 3D rendered logo for {subject}. Polished surface bevel, realistic ambient occlusion shadows, tactile material finish, subtle specular highlights, clean isometric depth on neutral studio background.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/3d', '3d']
+    },
+    {
+      id: 2007,
+      code: '/badge',
+      title: 'badge',
+      display_name: 'badge',
+      media: 'Image',
+      category: 'Logo Format',
+      use_case: 'Badge & emblem seal',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo emblem/badge',
+      example_prompt: '/logo /badge /vintage — Artisan Roasters',
+      example_result: 'Logo bergaya lencana/emblem terbungkus bingkai melingkar atau perisai dengan pita tipografi seimbang.',
+      expanded_prompt: 'Enclosed emblem badge logo for {subject}. Circular or shield frame enclosure, integrated typographic banner ribbon, authentic insignia crest, balanced vintage or modern stamp seal aesthetics.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/badge', 'badge']
+    },
+    {
+      id: 2008,
+      code: '/mascot',
+      title: 'mascot',
+      display_name: 'mascot',
+      media: 'Image',
+      category: 'Logo Format',
+      use_case: 'Mascot character logo',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo maskot',
+      example_prompt: '/logo /mascot /bold — Cyber Panther',
+      example_result: 'Logo karakter maskot dinamis dengan pose energik, ekspresi berkarakter kuat, dan garis luar tebal bersih.',
+      expanded_prompt: 'Dynamic illustrated character mascot logo for {subject}. Expressive charismatic facial feature, energetic action stance, sharp clean vector contours, bold cell-shaded detailing, iconic franchise mascot.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/mascot', 'mascot']
+    },
+    {
+      id: 2009,
+      code: '/sport',
+      title: 'sport',
+      display_name: 'sport',
+      media: 'Image',
+      category: 'Domain & Theme',
+      use_case: 'Athletic & sports branding',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo olahraga',
+      example_prompt: '/logo /sport /bold /3d — YBS FUTSAL CLUB',
+      example_result: 'Logo olahraga berkecepatan tinggi dengan garis aerodinamis dinamis, sudut tajam berani, dan energi atletik kuat.',
+      expanded_prompt: 'High-energy athletic sports team logo for {subject}. Dynamic aerodynamic speed angles, bold angular typography, aggressive competitive spirit, varsity league insignia, high-contrast energetic palette.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/sport', 'sport']
+    },
+    {
+      id: 2010,
+      code: '/esport',
+      title: 'esport',
+      display_name: 'esport',
+      media: 'Image',
+      category: 'Domain & Theme',
+      use_case: 'Gaming team & esport crest',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo gaming/esport',
+      example_prompt: '/logo /esport /3d — Phoenix Vanguard',
+      example_result: 'Logo tim gaming & esport dengan perisai agresif, sudut faceted futuristik, dan aksen neon tajam.',
+      expanded_prompt: 'Competitive esport gaming logo crest for {subject}. Sharp geometric faceted shield, cyber neon chromatic accents, menacing or futuristic silhouette, modern professional tournament clan mark.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/esport', 'esport']
+    },
+    {
+      id: 2011,
+      code: '/luxury',
+      title: 'luxury',
+      display_name: 'luxury',
+      media: 'Image',
+      category: 'Logo Style',
+      use_case: 'Luxury & high fashion',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo elegan/luxury',
+      example_prompt: '/logo /luxury /minimal — Maison Royale',
+      example_result: 'Logo elegan kelas dunia dengan estetika kemewahan halus, sentuhan serif mewah, dan harmoni agung.',
+      expanded_prompt: 'Ultra-luxurious haute couture logo design for {subject}. Delicate high-contrast serif letterforms, refined regal insignia, minimalist royal crest, timeless understated luxury brand prestige.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/luxury', 'luxury']
+    },
+    {
+      id: 2012,
+      code: '/bold',
+      title: 'bold',
+      display_name: 'bold',
+      media: 'Image',
+      category: 'Visual Tone',
+      use_case: 'Heavy & powerful presence',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo tegas dan kuat',
+      example_prompt: '/logo /sport /bold /3d — YBS FUTSAL CLUB',
+      example_result: 'Logo berbobot tegas dan kokoh dengan garis tebal berbobot, struktur kokoh, dan daya tarik visual dominan.',
+      expanded_prompt: 'Heavyweight bold authoritative logo design for {subject}. Thick confident solid shapes, powerful structural geometry, high visual weight, uncompromising commanding presence, punchy silhouette.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/bold', 'bold']
+    },
+    {
+      id: 2013,
+      code: '/icon',
+      title: 'icon',
+      display_name: 'icon',
+      media: 'Image',
+      category: 'Logo Format',
+      use_case: 'Pictorial mark & app icon',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo berbasis ikon',
+      example_prompt: '/logo /icon /modern — CloudSync',
+      example_result: 'Logo simbol piktorial mandiri yang ringkas, simetris, dan siap digunakan sebagai favicon atau app icon.',
+      expanded_prompt: 'Standalone pictorial glyph and app icon logo for {subject}. Grid-aligned geometric symmetry, clean silhouette recognizable at 16x16 pixels up to billboard scale, modern app store icon aesthetic.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/icon', 'icon']
+    },
+    {
+      id: 2014,
+      code: '/wordmark',
+      title: 'wordmark',
+      display_name: 'wordmark',
+      media: 'Image',
+      category: 'Typography',
+      use_case: 'Logotype & wordmark',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo berbasis tulisan',
+      example_prompt: '/logo /wordmark /modern — VORTEX LABS',
+      example_result: 'Logotype berbasis huruf kustom murni dengan penyesuaian kerning presisi, ligatur unik, dan tipografi eksklusif.',
+      expanded_prompt: 'Custom typographic wordmark logotype for {subject}. Tailored bespoke letterforms, optically balanced kerning, unique custom font ligatures, pristine text-only branding on clean background.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/wordmark', 'wordmark']
+    },
+    {
+      id: 2015,
+      code: '/monogram',
+      title: 'monogram',
+      display_name: 'monogram',
+      media: 'Image',
+      category: 'Typography',
+      use_case: 'Initial monogram mark',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Logo inisial',
+      example_prompt: '/logo /premium /minimal /monogram — MDS STEEL',
+      example_result: 'Logo monogram inisial huruf yang saling bertaut cerdas, proporsional geometris, dan elegan.',
+      expanded_prompt: 'Interlocking initial letters monogram logo for {subject}. Clever typographic ligature fusion, balanced geometric letter structure, prestigious signet crest, distinctive luxury monogram glyph.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/monogram', 'monogram']
+    },
+    {
+      id: 2016,
+      code: '/color',
+      title: 'color',
+      display_name: 'color',
+      media: 'Image',
+      category: 'Brand Specs',
+      use_case: 'Color palette system',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Tentukan kombinasi warna',
+      example_prompt: '/logo /color /minimal — Nordic Coffee',
+      example_result: 'Sistem palet warna merek yang harmonis, terukur, kontras tinggi, dan berstandar warna korporat.',
+      expanded_prompt: 'Curated brand color palette harmonization for {subject} logo. Balanced primary and secondary chromatic scheme, precise color contrast ratio, commercial branding guidelines color harmony.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/color', 'color']
+    },
+    {
+      id: 2017,
+      code: '/font',
+      title: 'font',
+      display_name: 'font',
+      media: 'Image',
+      category: 'Typography',
+      use_case: 'Typography pair & hierarchy',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Rekomendasi gaya tipografi',
+      example_prompt: '/logo /font /brand — Horizon Studio',
+      example_result: 'Pasangan tipografi profesional dengan font heading dan subteks yang serasi serta keterbacaan prima.',
+      expanded_prompt: 'Professional brand typography pairing and font style direction for {subject}. Cohesive primary header font, readable secondary typeface, refined optical hierarchy and letter spacing.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/font', 'font']
+    },
+    {
+      id: 2018,
+      code: '/mockup',
+      title: 'mockup',
+      display_name: 'mockup',
+      media: 'Image',
+      category: 'Presentation',
+      use_case: 'Photorealistic brand mockup',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Tampilkan pada mockup',
+      example_prompt: '/logo /mockup /premium — Zenith Watch',
+      example_result: 'Presentasi mockup komersial realistis: diemboss pada kartu nama mewah, papan nama kantor, atau kemasan.',
+      expanded_prompt: 'Photorealistic commercial mockup showcase of {subject} logo. Embossed foil on textured heavy cardstock, debossed leather stationery, or sleek architectural matte office signage with realistic lighting.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/mockup', 'mockup']
+    },
+    {
+      id: 2019,
+      code: '/print',
+      title: 'print',
+      display_name: 'print',
+      media: 'Image',
+      category: 'Production',
+      use_case: 'Print-ready vector spec',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Siapkan konsep untuk produksi/cetak',
+      example_prompt: '/logo /print /vector — Alpha Corp',
+      example_result: 'Konsep logo yang dioptimalkan untuk cetak fisik: kompatibel CMYK, sablon, bordir, dan grafir tanpa distorsi.',
+      expanded_prompt: 'Print-ready production grade vector logo design for {subject}. High-contrast CMYK color compatibility, flawless monochrome single-color reproduction, silkscreen, embroidery and engraving ready.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/print', 'print']
+    },
+    {
+      id: 2020,
+      code: '/vector',
+      title: 'vector',
+      display_name: 'vector',
+      media: 'Image',
+      category: 'Visual Format',
+      use_case: 'Clean scalable vector art',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Konsep logo bergaya vector',
+      example_prompt: '/logo /vector /icon — Nova App',
+      example_result: 'Seni grafis vektor 2D murni dengan kurva bezier mulus, warna solid tajam, dan skalabilitas tanpa batas.',
+      expanded_prompt: 'Flat clean 2D vector art logo for {subject}. Crisp smooth bezier curves, zero raster artifacts, solid fills, sharp defined edges, SVG and EPS infinite scalability aesthetics on white background.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/vector', 'vector']
+    },
+    {
+      id: 2021,
+      code: '/negative',
+      title: 'negative',
+      display_name: 'negative',
+      media: 'Image',
+      category: 'Prompt Engineering',
+      use_case: 'Negative constraints lock',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Buat negative prompt',
+      example_prompt: '/logo /negative — Clean Brand Lock',
+      example_result: 'Kumpulan batasan negatif untuk mencegah distorsi, teks sampah acak, latar belakang kotor, dan artefak raster.',
+      expanded_prompt: 'Negative prompt parameters for clean logo generation: [negative: photorealistic complex background, photographic noise, blurred edges, distorted typography, messy gradients, artifact, watermark, signature].',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/negative', 'negative']
+    },
+    {
+      id: 2022,
+      code: '/5opsi',
+      title: '5opsi',
+      display_name: '5opsi',
+      media: 'Image',
+      category: 'Ideation',
+      use_case: 'Multi-concept exploration sheet',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Buat 5 konsep berbeda',
+      example_prompt: '/logo /5opsi — Zenith Automotive',
+      example_result: 'Lembar eksplorasi 5 arah konsep desain logo yang berbeda (minimalis, 3D, emblem, maskot, monogram) dalam satu kisi presentasi.',
+      expanded_prompt: 'Generate a comprehensive 5-concept exploration design sheet for {subject} logo. 5 distinctly unique creative directions (minimalist, monogram, emblem badge, mascot, 3D icon), neatly arranged in a clean presentation grid.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/5opsi', '5opsi', '/5 opsi', '5 opsi']
+    },
+    {
+      id: 2023,
+      code: '/revisi',
+      title: 'revisi',
+      display_name: 'revisi',
+      media: 'Image',
+      category: 'Iteration',
+      use_case: 'Concept refinement & polish',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Revisi konsep sebelumnya',
+      example_prompt: '/logo /revisi — Apex Robotics',
+      example_result: 'Iterasi penyempurnaan desain: memoles ketebalan garis, menyempurnakan keselarasan geometris, dan memperjelas ikon.',
+      expanded_prompt: 'Refine and polish previous logo iteration of {subject}. Optimize stroke weight balance, sharpen geometric alignment, harmonize color saturation, and enhance icon legibility while preserving core identity.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/revisi', 'revisi']
+    },
+    {
+      id: 2024,
+      code: '/style',
+      title: 'style',
+      display_name: 'style',
+      media: 'Image',
+      category: 'Logo Style',
+      use_case: 'Visual style direction',
+      collection: 'Shortcut Prompt Logo',
+      family: 'Logo & Brand Identity',
+      description: 'Pilih gaya visual logo (minimal / modern / luxury / 3D / bold)',
+      example_prompt: '/logo /brand /style /icon /color /font /mockup /negative',
+      example_result: 'Menentukan arahan gaya visual spesifik logo untuk workflow desain yang terarah dan konsisten.',
+      expanded_prompt: 'Apply cohesive signature visual styling for {subject} logo. Harmonious design language, distinct artistic identity, balanced stylistic tone aligned with the brand aesthetic.',
+      code_class: 'Universal',
+      origin: 'Studio',
+      aliases: ['/style', 'style']
+    }
+  ];
+
   // --- DATASET & INDEXING ---
   const DATA = window.PROMPT_DATA || [];
+  
+  // Gabungkan 24 shortcode logo ke DATA master
+  LOGO_SHORTCODES.forEach(item => {
+    if (!DATA.some(x => norm(x.code) === norm(item.code))) {
+      DATA.push(item);
+    }
+  });
+
   const CODE_INDEX = new Map();
 
   DATA.forEach(entry => {
@@ -46,8 +490,32 @@
       DATA.find(x => norm(x.code).includes(norm(code)) || norm(x.title).includes(norm(code)));
   };
 
-  // --- 41 VISUAL GROUPS DEFINITIONS ---
+  // --- VISUAL GROUPS DEFINITIONS (TERMASUK SHORTCUT PROMPT LOGO) ---
   const BASE_GROUPS = [
+    {
+      id: 'logo-design',
+      title: 'Shortcut Prompt Logo',
+      desc: 'Sistem pembuatan konsep logo & identitas brand: minimalis, modern, 3D, emblem, maskot, sport, esport, wordmark, monogram, dan mockup cetak.',
+      img: 'assets/groups/logo-design.jpg',
+      collection: 'Brand Identity · Logo Studio',
+      codes: [
+        'logo', 'brand', 'minimal', 'modern', 'premium', '3d', 'badge',
+        'mascot', 'sport', 'esport', 'luxury', 'bold', 'icon', 'wordmark',
+        'monogram', 'color', 'font', 'mockup', 'print', 'vector', 'negative',
+        '5opsi', 'revisi'
+      ],
+      examples: [
+        {
+          formula: '/logo /sport /bold /3d — YBS FUTSAL CLUB',
+          desc: 'Artinya: buat konsep logo YBS Futsal Club dengan karakter sporty, tegas, dan 3D.'
+        },
+        {
+          formula: '/logo /premium /minimal /monogram — MDS STEEL',
+          desc: '→ Konsep logo MDS STEEL dengan gaya premium, minimalis, dan monogram.'
+        }
+      ],
+      workflow: '/logo /brand /style /icon /color /font /mockup /negative'
+    },
     { id: 'reveal', title: 'Reveal & Unveiling', desc: 'Cara kreatif menampilkan produk melalui asap, cairan, partikel, cahaya, dan material.', img: 'assets/groups/reveal.jpg', collection: 'Product Ads · Part 1', codes: ['smoke reveal','liquid reveal','particle reveal','ice break reveal','flower bloom reveal','fabric reveal','sand reveal','shadow reveal','portal reveal','light sweep reveal'] },
     { id: 'cgi-3d', title: 'CGI & 3D Billboard', desc: 'Produk dalam adegan tiga dimensi, billboard anamorphic, hologram, chrome, dan orbit.', img: 'assets/groups/cgi-3d.jpg', collection: 'Product Ads · Part 1', codes: ['3D billboard','floating product','exploded view','parts assembly','360 orbit','hologram product','glass sculpture','chrome world','product cube','neon 3D ad'] },
     { id: 'miniature', title: 'Miniature World', desc: 'Dunia mikroskopis dengan pekerja mini dan produk berskala raksasa sebagai pusat adegan.', img: 'assets/groups/miniature.jpg', collection: 'Product Ads · Part 1', codes: ['miniature factory','tiny workers','miniature kitchen','tiny delivery crew','miniature construction','miniature lab','tiny farmers','miniature city','tiny workers cleaning','miniature garden'] },
@@ -500,6 +968,13 @@
 
   // --- RENDER PROMPT STUDIO (COMPOSER) ---
   const COMPOSER_PRESETS = {
+    logo: {
+      subject: 'YBS FUTSAL CLUB / MDS STEEL',
+      mode: 'image',
+      ratio: '1:1',
+      lighting: 'clean vector studio lighting, high contrast white isolated background',
+      constraints: 'crisp vector bezier lines, balanced typography, no photographic clutter, scalable svg aesthetic'
+    },
     product: { subject: 'Premium product, commercial advertising visual', mode: 'image', ratio: '4:5', lighting: 'clean commercial studio highlights, high-end reflection control', constraints: 'preserve exact geometry and logo; clean readable frame' },
     wedding: { subject: 'Elegant romantic wedding couple portrait', mode: 'video', ratio: '16:9', lighting: 'golden volumetric warm sunset glow, soft romantic haze', constraints: 'freeze faces and clothing; animate only particles and veil' },
     food: { subject: 'Appetizing gourmet burger with melting cheese', mode: 'video', ratio: '9:16', lighting: 'glossy appetizing commercial lighting, crisp condensation droplets', constraints: 'realistic ingredients texture; no distorted anatomy' },
@@ -605,6 +1080,79 @@
     $('#modalGroupDesc').textContent = group.desc;
     $('#modalCollectionName').textContent = group.collection;
     $('#modalSubjectInput').value = STATE.selectedSubject;
+
+    // Render formula & workflow jika tersedia pada kelompok (misal Shortcut Prompt Logo)
+    const formulaContainer = $('#modalFormulaContainer');
+    if (formulaContainer) {
+      if (group.examples || group.workflow) {
+        let formulaHtml = `
+          <div class="formula-header">
+            <span class="formula-fire-badge">🔥 Contoh Penggunaan Cepat</span>
+            <span style="font-size:11px;color:var(--text-dim);">Klik tombol Salin untuk langsung menyalin</span>
+          </div>
+          <div class="formula-items-list">
+        `;
+
+        if (group.examples && group.examples.length) {
+          group.examples.forEach(ex => {
+            formulaHtml += `
+              <div class="formula-item-card">
+                <div class="formula-code-row">
+                  <span class="formula-code-text">${ex.formula}</span>
+                  <button class="btn-formula-copy" data-copy-formula="${ex.formula}" title="Salin formula ${ex.formula}">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Salin
+                  </button>
+                </div>
+                <div class="formula-desc-text">${ex.desc}</div>
+              </div>
+            `;
+          });
+        }
+
+        formulaHtml += `</div>`;
+
+        if (group.workflow) {
+          formulaHtml += `
+            <div class="workflow-section-box">
+              <div class="workflow-title-text">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Shortcut Lengkap Workflow Desain Logo:
+              </div>
+              <div class="formula-code-row">
+                <span class="formula-code-text" style="color:#0f172a;">${group.workflow}</span>
+                <button class="btn-formula-copy" data-copy-formula="${group.workflow}" style="background:#ffffff;border-color:#4f46e5;color:#4f46e5;font-weight:700;" title="Salin seluruh workflow logo">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Salin Workflow
+                </button>
+              </div>
+            </div>
+          `;
+        }
+
+        formulaContainer.innerHTML = formulaHtml;
+        formulaContainer.style.display = 'flex';
+
+        // Handler klik tombol salin formula & workflow
+        formulaContainer.querySelectorAll('[data-copy-formula]').forEach(btn => {
+          btn.onclick = e => {
+            e.stopPropagation();
+            const formula = btn.dataset.copyFormula;
+            copyToClipboard(formula, 'Berhasil disalin ke clipboard!');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<span style="color:#059669;font-weight:800;">Tersalin ✓</span>';
+            btn.classList.add('copied');
+            setTimeout(() => {
+              btn.innerHTML = orig;
+              btn.classList.remove('copied');
+            }, 1200);
+          };
+        });
+      } else {
+        formulaContainer.innerHTML = '';
+        formulaContainer.style.display = 'none';
+      }
+    }
 
     renderModalCodesList();
 
@@ -1112,13 +1660,21 @@
       });
 
     $('#composerPresetSelect')?.addEventListener('change', e => {
-      const preset = COMPOSER_PRESETS[e.target.value];
+      const val = e.target.value;
+      const preset = COMPOSER_PRESETS[val];
       if (!preset) return;
       if ($('#composerSubject')) $('#composerSubject').value = preset.subject;
       if ($('#composerMode')) $('#composerMode').value = preset.mode;
       if ($('#composerRatio')) $('#composerRatio').value = preset.ratio;
       if ($('#composerLighting')) $('#composerLighting').value = preset.lighting;
       if ($('#composerConstraints')) $('#composerConstraints').value = preset.constraints;
+
+      if (val === 'logo') {
+        const logoWorkflow = ['/logo', '/brand', '/minimal', '/icon', '/color', '/font', '/mockup', '/negative'];
+        logoWorkflow.forEach(code => STATE.composerCodes.add(code));
+        localStorage.setItem('pv4-composer-codes', JSON.stringify([...STATE.composerCodes]));
+      }
+
       renderComposer();
     });
 
