@@ -477,6 +477,13 @@
     }
   });
 
+  // Gabungkan 1.242 shortcode baru dari Prompt Baru ke DATA master
+  if (window.PROMPT_BARU_DATA && Array.isArray(window.PROMPT_BARU_DATA)) {
+    window.PROMPT_BARU_DATA.forEach(item => {
+      DATA.push(item);
+    });
+  }
+
   const CODE_INDEX = new Map();
 
   DATA.forEach(entry => {
@@ -565,6 +572,11 @@
     ['ref-extreme-zoom',14,'Extreme Zoom-In Codes','extremezoom','Teknik perjalanan kamera berkelanjutan dari sudut pandang luas (wide) menembus detail mikroskopis produk.']
   ];
 
+  // Tambahkan 32 koleksi poster referensi baru dari Prompt Baru
+  if (window.PROMPT_BARU_REFERENCE_SPECS && Array.isArray(window.PROMPT_BARU_REFERENCE_SPECS)) {
+    REFERENCE_SPECS.push(...window.PROMPT_BARU_REFERENCE_SPECS);
+  }
+
   const GROUPS = [...BASE_GROUPS];
 
   GENERATED_SPECS.forEach(([id, family, title, desc]) => {
@@ -612,6 +624,8 @@
     'ref-product-ads-1',
     'ref-product-ads-2',
     'ref-cinematic-frames',
+    'ref-creator-codes',
+    'ref-design-video-99',
     'looping-continuity',
     'selective-animation',
     'storyboard-continuity',
@@ -1695,12 +1709,44 @@
     $('#btnComposePrompt')?.addEventListener('click', () => switchView('composer'));
   }
 
+  // --- DYNAMIC COUNTERS & UI SYNC ---
+  function updateDynamicCounters() {
+    const totalCodesFormatted = DATA.length.toLocaleString('id-ID');
+    const totalGroupsFormatted = GROUPS.length.toLocaleString('id-ID');
+
+    // Update Profile Stats
+    const codeCountEl = $('#codeCount');
+    if (codeCountEl) codeCountEl.textContent = totalCodesFormatted;
+
+    const groupCountEl = $('#groupCount');
+    if (groupCountEl) groupCountEl.textContent = totalGroupsFormatted;
+
+    // Update Profile Explore Button
+    const btnExplore = $('#btnExploreAll');
+    if (btnExplore) btnExplore.textContent = `Jelajahi ${totalCodesFormatted} Kode`;
+
+    // Update Sidebar Navigation Label & Badge
+    const sidebarExplorerLink = document.querySelector('.sidebar-nav .nav-link[data-view="explorer"]');
+    if (sidebarExplorerLink) {
+      sidebarExplorerLink.title = `Jelajahi ${totalCodesFormatted} Shortcode Lengkap`;
+      const label = sidebarExplorerLink.querySelector('.nav-label');
+      if (label) label.textContent = `Kamus ${totalCodesFormatted}`;
+      const badge = sidebarExplorerLink.querySelector('.badge-count');
+      if (badge) badge.textContent = totalCodesFormatted;
+    }
+
+    // Update Explorer Total Badge
+    const explorerBadge = $('#explorerTotalBadge');
+    if (explorerBadge) explorerBadge.textContent = `${totalCodesFormatted} Shortcode`;
+  }
+
   // --- INITIALIZATION ---
   function init() {
     applyTheme(STATE.theme);
     renderStories();
     renderFeed();
     setupEvents();
+    updateDynamicCounters();
 
     // Check URL params (?open=reveal)
     const openParam = new URLSearchParams(window.location.search).get('open');
