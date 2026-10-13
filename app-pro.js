@@ -188,18 +188,48 @@
     el._timer = setTimeout(() => el.classList.remove('show'), 2200);
   }
 
-  function copyToClipboard(text, successMsg) {
+  async function copyToClipboard(text, successMsg) {
+    if (!text) return false;
+    let copied = false;
+
+    // 1. Coba Clipboard API modern jika tersedia
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(() => toast(successMsg || 'Berhasil disalin!'));
-    } else {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      toast(successMsg || 'Berhasil disalin!');
+      try {
+        await navigator.clipboard.writeText(text);
+        copied = true;
+      } catch (err) {
+        console.warn('Clipboard API gagal, beralih ke fallback execCommand:', err);
+      }
     }
+
+    // 2. Fallback textarea execCommand (berfungsi di HTTP, WebView, dan iframe)
+    if (!copied) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '0';
+        ta.style.left = '-9999px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        copied = document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch (err) {
+        console.error('Fallback execCommand gagal:', err);
+      }
+    }
+
+    // 3. Fallback terakhir: prompt manual jika sistem keamanan OS memblokir
+    if (!copied) {
+      window.prompt('Salin teks shortcut berikut secara manual (Ctrl+C):', text);
+      return false;
+    }
+
+    toast(successMsg || 'Berhasil disalin ke clipboard!');
+    return true;
   }
 
   // --- THEME SWITCHER ---
@@ -292,9 +322,9 @@
             <h3 class="card-title">${g.title}</h3>
             <p class="card-desc">${g.desc}</p>
             
-            <!-- Cuplikan Shortcode Informatif -->
-            <div class="card-samples-row" title="Contoh shortcode dalam kelompok ini">
-              ${sampleCodes.map(code => `<span class="card-code-chip">${code}</span>`).join('')}
+            <!-- Cuplikan Shortcode Informatif & Siap Salin -->
+            <div class="card-samples-row" title="Klik pada shortcut untuk langsung menyalin ke clipboard">
+              ${sampleCodes.map(code => `<span class="card-code-chip" data-copy="${code}" title="Klik untuk salin ${code}">${code}</span>`).join('')}
               ${g.codes.length > 3 ? `<span class="card-code-chip more">+${g.codes.length - 3}</span>` : ''}
             </div>
 
@@ -309,6 +339,22 @@
 
     $$('.group-post-card').forEach(card => {
       card.onclick = () => openModalGroup(card.dataset.id);
+    });
+
+    // Pasang handler salin cepat untuk chip shortcode di kartu feed
+    $$('.card-code-chip[data-copy]').forEach(chip => {
+      chip.onclick = e => {
+        e.stopPropagation();
+        const code = chip.dataset.copy;
+        copyToClipboard(code, `Shortcut ${code} berhasil disalin!`);
+        const orig = chip.textContent;
+        chip.textContent = 'Tersalin ✓';
+        chip.classList.add('copied');
+        setTimeout(() => {
+          chip.textContent = orig;
+          chip.classList.remove('copied');
+        }, 1200);
+      };
     });
   }
 
@@ -363,28 +409,51 @@
       return `
         <div class="code-card" data-code-id="${item.id}">
           <div class="code-card-header">
-            <span class="code-badge">${item.code}</span>
+            <span class="code-badge" data-copy-shortcut="${item.code}" title="Klik untuk salin shortcut ${item.code}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              ${item.code}
+            </span>
             <span class="media-chip ${item.media.toLowerCase()}">${item.media}</span>
           </div>
           <p class="code-card-desc">${item.description}</p>
           <div class="code-card-footer">
             <span>${item.family}</span>
-            <button class="btn-fav" data-fav-id="${item.id}" title="Simpan ke favorit">
-              ${isSaved ? '★' : '☆'}
-            </button>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <button class="btn-copy-code" data-copy-shortcut="${item.code}" title="Salin shortcut ${item.code}" style="padding:2px 7px;font-size:10.5px;">
+                Salin
+              </button>
+              <button class="btn-fav" data-fav-id="${item.id}" title="Simpan ke favorit">
+                ${isSaved ? '★' : '☆'}
+              </button>
+            </div>
           </div>
         </div>
       `;
     }).join('');
 
+    // Handler klik kartu: salin prompt lengkap
     $$('.code-card').forEach(card => {
       card.onclick = e => {
-        if (e.target.closest('.btn-fav')) return;
+        if (e.target.closest('.btn-fav') || e.target.closest('[data-copy-shortcut]')) return;
         const id = +card.dataset.codeId;
         const entry = DATA.find(x => x.id === id);
         if (entry) {
-          copyToClipboard(getCleanPrompt(entry.code), `Prompt untuk ${entry.code} disalin!`);
+          copyToClipboard(getCleanPrompt(entry.code), `Prompt lengkap untuk ${entry.code} disalin!`);
         }
+      };
+    });
+
+    // Handler klik salin shortcut langsung pada badge dan tombol salin
+    $$('[data-copy-shortcut]').forEach(el => {
+      el.onclick = e => {
+        e.stopPropagation();
+        const code = el.dataset.copyShortcut;
+        copyToClipboard(code, `Shortcut ${code} berhasil disalin!`);
+        const orig = el.innerHTML;
+        el.innerHTML = '<span style="color:#10b981;font-weight:800;">Tersalin ✓</span>';
+        setTimeout(() => {
+          el.innerHTML = orig;
+        }, 1200);
       };
     });
 
@@ -558,22 +627,64 @@
     listEl.innerHTML = group.codes.map((code, idx) => {
       const entry = findEntry(code);
       const isSelected = idx === STATE.activeShortIndex;
+      const shortCode = '/' + String(code).replaceAll(' ', '');
       return `
-        <button class="modal-code-item ${isSelected ? 'active' : ''}" data-idx="${idx}">
+        <div class="modal-code-item ${isSelected ? 'active' : ''}" data-idx="${idx}" data-code="${shortCode}">
           <span class="modal-code-num">${String(idx + 1).padStart(2, '0')}</span>
           <div class="modal-code-main">
-            <b>/${String(code).replaceAll(' ', '')}</b>
+            <b class="modal-code-name" data-copy="${shortCode}" title="Klik untuk salin ${shortCode}">${shortCode}</b>
             <span>${entry?.description || group.desc}</span>
           </div>
-          <span class="modal-code-chev">›</span>
-        </button>
+          <div class="modal-code-actions">
+            <button class="btn-copy-code" data-copy="${shortCode}" title="Salin shortcut ${shortCode}" aria-label="Salin shortcut">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span class="copy-lbl">Salin</span>
+            </button>
+            <span class="modal-code-chev">›</span>
+          </div>
+        </div>
       `;
     }).join('');
 
     $$('.modal-code-item').forEach(item => {
-      item.onclick = () => {
+      item.onclick = e => {
+        if (e.target.closest('.btn-copy-code') || e.target.closest('.modal-code-name')) return;
         STATE.activeShortIndex = +item.dataset.idx;
         showActiveShortDetail();
+      };
+    });
+
+    // Pasang handler salin cepat untuk tombol salin di baris kode
+    $$('.btn-copy-code').forEach(btn => {
+      btn.onclick = e => {
+        e.stopPropagation();
+        const code = btn.dataset.copy;
+        copyToClipboard(code, `Shortcut ${code} berhasil disalin!`);
+        const lbl = btn.querySelector('.copy-lbl');
+        if (lbl) {
+          lbl.textContent = 'Tersalin ✓';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            lbl.textContent = 'Salin';
+            btn.classList.remove('copied');
+          }, 1200);
+        }
+      };
+    });
+
+    // Pasang handler salin saat nama shortcut di-klik langsung
+    $$('.modal-code-name').forEach(nameEl => {
+      nameEl.onclick = e => {
+        e.stopPropagation();
+        const code = nameEl.dataset.copy;
+        copyToClipboard(code, `Shortcut ${code} berhasil disalin!`);
+        const orig = nameEl.textContent;
+        nameEl.textContent = 'Tersalin ✓';
+        nameEl.style.color = '#10b981';
+        setTimeout(() => {
+          nameEl.textContent = orig;
+          nameEl.style.color = '';
+        }, 1200);
       };
     });
 
@@ -589,6 +700,7 @@
     });
 
     const code = group.codes[STATE.activeShortIndex];
+    const shortCode = '/' + String(code).replaceAll(' ', '');
     const entry = findEntry(code);
     const detailEl = $('#modalShortDetail');
     if (!detailEl) return;
@@ -598,8 +710,8 @@
 
     detailEl.innerHTML = `
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-        <h4 style="font-family:var(--font-mono);font-size:14.5px;color:#818cf8;margin:0;">
-          /${String(code).replaceAll(' ', '')}
+        <h4 style="font-family:var(--font-mono);font-size:14.5px;color:var(--primary);margin:0;cursor:pointer;" id="detailShortcodeTitle" title="Klik untuk salin ${shortCode}">
+          ${shortCode} <span style="font-size:11px;font-weight:600;color:var(--text-dim);font-family:var(--font-sans);">(klik untuk salin)</span>
         </h4>
         <span class="media-chip ${entry?.media ? entry.media.toLowerCase() : 'image'}">${entry?.media || 'Visual'}</span>
       </div>
@@ -607,26 +719,44 @@
         ${entry?.example_result || entry?.description || group.desc}
       </p>
       <div class="detail-prompt-box">${cleanPrompt}</div>
-      <div style="display:flex;gap:8px;margin-top:8px;">
-        <button class="btn-action primary" id="modalCopyPromptBtn" style="height:32px;font-size:12px;">
-          Salin Prompt Ini
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+        <button class="btn-action primary" id="modalCopyShortcutBtn" style="height:34px;font-size:12.5px;font-weight:750;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Salin Shortcut (${shortCode})
         </button>
-        <button class="btn-action" id="modalAddToComposerBtn" style="height:32px;font-size:12px;">
-          + Tambahkan ke Composer
+        <button class="btn-action" id="modalCopyPromptBtn" style="height:34px;font-size:12px;">
+          Salin Prompt Lengkap
+        </button>
+        <button class="btn-action" id="modalAddToComposerBtn" style="height:34px;font-size:12px;">
+          + Ke Composer
         </button>
       </div>
     `;
 
     detailEl.classList.add('open');
 
+    $('#detailShortcodeTitle').onclick = () => {
+      copyToClipboard(shortCode, `Shortcut ${shortCode} berhasil disalin!`);
+    };
+
+    $('#modalCopyShortcutBtn').onclick = () => {
+      copyToClipboard(shortCode, `Shortcut ${shortCode} berhasil disalin!`);
+      const btn = $('#modalCopyShortcutBtn');
+      if (btn) {
+        const origHtml = btn.innerHTML;
+        btn.innerHTML = '<span>Tersalin ✓</span>';
+        setTimeout(() => btn.innerHTML = origHtml, 1200);
+      }
+    };
+
     $('#modalCopyPromptBtn').onclick = () => {
-      copyToClipboard(cleanPrompt, 'Prompt siap pakai berhasil disalin!');
+      copyToClipboard(cleanPrompt, 'Prompt lengkap berhasil disalin!');
     };
 
     $('#modalAddToComposerBtn').onclick = () => {
       STATE.composerCodes.add(code);
       localStorage.setItem('pv4-composer-codes', JSON.stringify([...STATE.composerCodes]));
-      toast(`/${String(code).replaceAll(' ', '')} ditambahkan ke Composer!`);
+      toast(`${shortCode} ditambahkan ke Composer!`);
     };
   }
 
